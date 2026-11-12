@@ -59,5 +59,8 @@ dependencies {
     implementation(libs.compose.icons)
     //ViewModel
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.runtime.compose)
+    //Navigasi
+    implementation(libs.navigation.compose)
 
 }
