@@ -57,5 +57,7 @@ dependencies {
     ksp(libs.room.compiler)
     //icons
     implementation(libs.compose.icons)
+    //ViewModel
+    implementation(libs.lifecycle.viewmodel.compose)
 
 }
