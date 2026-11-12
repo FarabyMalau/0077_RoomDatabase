@@ -32,12 +32,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roomsiswa.R
-import com.example.roomsiswa.room.Siswa
-import com.example.roomsiswa.uicontroller.DestinasiNavigasi
-import com.example.roomsiswa.uicontroller.SiswaTopAppBar
-import com.example.roomsiswa.viewmodel.HomeViewModel
-import com.example.roomsiswa.viewmodel.PenyediaViewModel
+import com.example.pertemuan9.R
+import com.example.pertemuan9.room.Siswa
+import com.example.pertemuan9.uicontroller.DestinasiNavigasi
+import com.example.pertemuan9.uicontroller.SiswaTopAppBar
+import com.example.pertemuan9.viewmodel.HomeViewModel
+import com.example.pertemuan9.viewmodel.PenyediaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
@@ -154,7 +154,7 @@ fun DataSiswa(
                     contentDescription = null,
                 )
                 Text(
-                    text = siswa.telpon,
+                    text = siswa.telepon,
                     style = MaterialTheme.typography.titleMedium
                 )
             }

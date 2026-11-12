@@ -55,7 +55,7 @@ fun DetailSiswa.toSiswa(): Siswa = Siswa(
     id = id,
     nama = nama,
     alamat = alamat,
-    telpon = telpon
+    telepon = telpon
 )
 
 fun Siswa.toUiStateSiswa(isEntryValid: Boolean = false): UIStateSiswa = UIStateSiswa(
@@ -67,5 +67,5 @@ fun Siswa.toDetailSiswa(): DetailSiswa = DetailSiswa(
     id = id,
     nama = nama,
     alamat = alamat,
-    telpon = telpon
+    telpon = telepon
 )
