@@ -3,9 +3,6 @@ package com.example.pertemuan9.viewmodel.provider
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pertemuan9.model.DetailSiswa
-import com.example.pertemuan9.model.toDetailSiswa
-import com.example.pertemuan9.model.toSiswa
 import com.example.pertemuan9.repositori.RepositoriSiswa
 import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa
 import kotlinx.coroutines.flow.SharingStarted

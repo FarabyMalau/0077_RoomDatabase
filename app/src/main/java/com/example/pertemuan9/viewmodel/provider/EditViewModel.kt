@@ -1,4 +1,4 @@
-package com.example.pertemuan9.viewmodel
+package com.example.pertemuan9.viewmodel.provider
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,10 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pertemuan9.model.DetailSiswa
-import com.example.pertemuan9.model.UIStateSiswa
-import com.example.pertemuan9.model.toSiswa
-import com.example.pertemuan9.model.toUIStateSiswa
 import com.example.pertemuan9.repositori.RepositoriSiswa
 import com.example.pertemuan9.uicontroller.route.DestinasiEditSiswa
 import kotlinx.coroutines.flow.filterNotNull
@@ -21,7 +17,7 @@ class EditViewModel(
     private val repositoriSiswa: RepositoriSiswa
 ) : ViewModel() {
 
-    var uiStateSiswa by mutableStateOf(value = UIStateSiswa())
+    var uiStateSiswa by mutableStateOf(UIStateSiswa())
         private set
 
     private val idSiswa: Int = checkNotNull(savedStateHandle[DestinasiEditSiswa.itemIdArg])
@@ -31,7 +27,7 @@ class EditViewModel(
             uiStateSiswa = repositoriSiswa.getSiswaStream(idSiswa)
                 .filterNotNull()
                 .first()
-                .toUIStateSiswa(isEntryValid = true)
+                .toUiStateSiswa(isEntryValid = true)
         }
     }
 
@@ -41,7 +37,7 @@ class EditViewModel(
     }
 
     private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
-        return with(receiver = uiState) {
+        return with(uiState) {
             nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
     }
