@@ -1,4 +1,4 @@
-package com.example.pertemuan9.view
+package com.example.pertemuan9.uicontroller
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,9 +11,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pertemuan9.view.route.DestinasiEditSiswa
-import com.example.pertemuan9.viewmodel.EditViewModel
+import com.example.pertemuan9.uicontroller.route.DestinasiEditSiswa
+import com.example.pertemuan9.view.EntrySiswaBody
 import com.example.pertemuan9.viewmodel.PenyediaViewModel
+import com.example.pertemuan9.viewmodel.provider.EditViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,6 +25,8 @@ fun EditSiswaScreen(
     modifier: Modifier = Modifier,
     viewModel: EditViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             SiswaTopAppBar(
@@ -34,7 +37,6 @@ fun EditSiswaScreen(
         },
         modifier = modifier
     ) { innerPadding ->
-        val coroutineScope = rememberCoroutineScope()
         EntrySiswaBody(
             uiStateSiswa = viewModel.uiStateSiswa,
             onSiswaValueChange = viewModel::updateUiState,

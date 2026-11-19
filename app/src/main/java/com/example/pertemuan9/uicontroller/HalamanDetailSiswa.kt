@@ -1,4 +1,4 @@
-package com.example.pertemuan9.view
+package com.example.pertemuan9.uicontroller
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -36,11 +36,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan9.R
 import com.example.pertemuan9.room.Siswa
-import com.example.pertemuan9.view.route.DestinasiDetailSiswa
-import com.example.pertemuan9.viewmodel.DetailSiswaUiState
-import com.example.pertemuan9.viewmodel.DetailViewModel
+import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa
 import com.example.pertemuan9.viewmodel.PenyediaViewModel
-import com.example.pertemuan9.viewmodel.toSiswa
+import com.example.pertemuan9.viewmodel.provider.DetailSiswaUiState
+import com.example.pertemuan9.viewmodel.provider.DetailViewModel
+import com.example.pertemuan9.viewmodel.provider.toSiswa
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -70,14 +70,14 @@ fun DetailSiswaScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = stringResource(R.string.edit_siswa)
+                    contentDescription = stringResource(R.string.update)
                 )
             }
         },
         modifier = modifier
     ) { innerPadding ->
-        DetailSiswaBody(
-            detailUiState = uiState,
+        BodyDetailDataSiswa(
+            detailSiswaUiState = uiState,
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteSiswa()
@@ -92,8 +92,8 @@ fun DetailSiswaScreen(
 }
 
 @Composable
-private fun DetailSiswaBody(
-    detailUiState: DetailSiswaUiState,
+private fun BodyDetailDataSiswa(
+    detailSiswaUiState: DetailSiswaUiState,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -103,8 +103,8 @@ private fun DetailSiswaBody(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
 
-        DetailSiswa(
-            siswa = detailUiState.detailSiswa.toSiswa(),
+        DetailDataSiswa(
+            siswa = detailSiswaUiState.detailSiswa.toSiswa(),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -130,7 +130,7 @@ private fun DetailSiswaBody(
 }
 
 @Composable
-fun DetailSiswa(
+fun DetailDataSiswa(
     siswa: Siswa,
     modifier: Modifier = Modifier
 ) {
@@ -147,19 +147,19 @@ fun DetailSiswa(
                 .padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
-            DetailSiswaRow(
-                labelResID = R.string.nama,
+            BarisDetailData(
+                labelResID = R.string.nama1,
                 itemDetail = siswa.nama,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
-            DetailSiswaRow(
-                labelResID = R.string.alamat,
+            BarisDetailData(
+                labelResID = R.string.alamat1,
                 itemDetail = siswa.alamat,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
-            DetailSiswaRow(
-                labelResID = R.string.telpon,
-                itemDetail = siswa.telpon,
+            BarisDetailData(
+                labelResID = R.string.telpon1,
+                itemDetail = siswa.telepon,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
         }
@@ -167,7 +167,7 @@ fun DetailSiswa(
 }
 
 @Composable
-private fun DetailSiswaRow(
+private fun BarisDetailData(
     @StringRes labelResID: Int,
     itemDetail: String,
     modifier: Modifier = Modifier
@@ -188,7 +188,7 @@ private fun DeleteConfirmationDialog(
     AlertDialog(
         onDismissRequest = { /* Do nothing */ },
         title = { Text(stringResource(R.string.attention)) },
-        text = { Text(stringResource(R.string.delete_question)) },
+        text = { Text(stringResource(R.string.tanya)) },
         modifier = modifier,
         dismissButton = {
             TextButton(onClick = onDeleteCancel) {
