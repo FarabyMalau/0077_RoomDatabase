@@ -36,7 +36,7 @@ import com.example.pertemuan9.R
 import com.example.pertemuan9.room.Siswa
 import com.example.pertemuan9.uicontroller.DestinasiNavigasi
 import com.example.pertemuan9.uicontroller.SiswaTopAppBar
-import com.example.pertemuan9.viewmodel.HomeViewModel
+import com.example.pertemuan9.viewmodel.provider.HomeViewModel
 import com.example.pertemuan9.viewmodel.PenyediaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
