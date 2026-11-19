@@ -15,7 +15,7 @@ import com.example.pertemuan9.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(
+fun SiswaTopAppBar(
     title: String,
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,
