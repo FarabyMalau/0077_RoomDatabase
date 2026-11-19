@@ -1,10 +1,10 @@
-package com.example.pertemuan9.viewmodel.provider
+package com.example.pertemuan9.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan9.repositori.RepositoriSiswa
-import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa
+import com.example.pertemuan9.view.route.DestinasiDetailSiswa
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -25,7 +25,7 @@ class DetailViewModel(
                 DetailSiswaUiState(detailSiswa = it.toDetailSiswa())
             }.stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = TIMEOUT_MILIS),
+                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
                 initialValue = DetailSiswaUiState()
             )
 
@@ -34,10 +34,13 @@ class DetailViewModel(
     }
 
     companion object {
-        private const val TIMEOUT_MILIS = 5_000L
+        private const val TIMEOUT_MILLIS = 5_000L
     }
 }
 
+/**
+ * UI State for ItemDetailScreen
+ */
 data class DetailSiswaUiState(
     val detailSiswa: DetailSiswa = DetailSiswa()
 )

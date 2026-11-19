@@ -1,6 +1,9 @@
-package com.example.pertemuan9.uicontroller
+package com.example.pertemuan9.view
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -8,10 +11,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pertemuan9.uicontroller.route.DestinasiEditSiswa
-import com.example.pertemuan9.view.EntrySiswaBody
+import com.example.pertemuan9.view.route.DestinasiEditSiswa
+import com.example.pertemuan9.viewmodel.EditViewModel
 import com.example.pertemuan9.viewmodel.PenyediaViewModel
-import com.example.pertemuan9.viewmodel.provider.EditViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +44,10 @@ fun EditSiswaScreen(
                     navigateBack()
                 }
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
         )
     }
 }

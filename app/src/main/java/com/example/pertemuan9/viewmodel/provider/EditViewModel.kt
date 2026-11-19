@@ -1,4 +1,4 @@
-package com.example.pertemuan9.viewmodel.provider
+package com.example.pertemuan9.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan9.repositori.RepositoriSiswa
-import com.example.pertemuan9.uicontroller.route.DestinasiEditSiswa
+import com.example.pertemuan9.view.route.DestinasiEditSiswa
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -27,13 +27,13 @@ class EditViewModel(
             uiStateSiswa = repositoriSiswa.getSiswaStream(idSiswa)
                 .filterNotNull()
                 .first()
-                .toUiStateSiswa(isEntryValid = true)
+                .toUiStateSiswa(true)
         }
     }
 
     fun updateUiState(detailSiswa: DetailSiswa) {
         uiStateSiswa =
-            UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(uiState = detailSiswa))
+            UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
     }
 
     private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {

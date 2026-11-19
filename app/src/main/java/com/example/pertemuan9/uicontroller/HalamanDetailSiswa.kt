@@ -1,4 +1,4 @@
-package com.example.pertemuan9.uicontroller
+package com.example.pertemuan9.view
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -36,11 +36,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan9.R
 import com.example.pertemuan9.room.Siswa
-import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa
+import com.example.pertemuan9.view.route.DestinasiDetailSiswa
+import com.example.pertemuan9.viewmodel.DetailSiswaUiState
+import com.example.pertemuan9.viewmodel.DetailViewModel
 import com.example.pertemuan9.viewmodel.PenyediaViewModel
-import com.example.pertemuan9.viewmodel.provider.DetailSiswaUiState
-import com.example.pertemuan9.viewmodel.provider.DetailViewModel
-import com.example.pertemuan9.viewmodel.provider.toSiswa
+import com.example.pertemuan9.viewmodel.toSiswa
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,6 +51,9 @@ fun DetailSiswaScreen(
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
+    val uiState by viewModel.uiDetailState.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             SiswaTopAppBar(
@@ -60,25 +63,21 @@ fun DetailSiswaScreen(
             )
         },
         floatingActionButton = {
-            val uiState = viewModel.uiDetailState.collectAsState()
             FloatingActionButton(
-                onClick = {
-                    navigateToEditItem(uiState.value.detailSiswa.id)
-                },
+                onClick = { navigateToEditItem(uiState.detailSiswa.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
-                    contentDescription = stringResource(R.string.update),
+                    contentDescription = stringResource(R.string.edit_siswa)
                 )
             }
-        }, modifier = modifier
+        },
+        modifier = modifier
     ) { innerPadding ->
-        val uiState = viewModel.uiDetailState.collectAsState()
-        val coroutineScope = rememberCoroutineScope()
-        BodyDetailDataSiswa(
-            detailSiswaUiState = uiState.value,
+        DetailSiswaBody(
+            detailUiState = uiState,
             onDelete = {
                 coroutineScope.launch {
                     viewModel.deleteSiswa()
@@ -93,8 +92,8 @@ fun DetailSiswaScreen(
 }
 
 @Composable
-private fun BodyDetailDataSiswa(
-    detailSiswaUiState: DetailSiswaUiState,
+private fun DetailSiswaBody(
+    detailUiState: DetailSiswaUiState,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -104,8 +103,8 @@ private fun BodyDetailDataSiswa(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
 
-        DetailDataSiswa(
-            siswa = detailSiswaUiState.detailSiswa.toSiswa(),
+        DetailSiswa(
+            siswa = detailUiState.detailSiswa.toSiswa(),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -116,6 +115,7 @@ private fun BodyDetailDataSiswa(
         ) {
             Text(stringResource(R.string.delete))
         }
+
         if (deleteConfirmationRequired) {
             DeleteConfirmationDialog(
                 onDeleteConfirm = {
@@ -130,11 +130,13 @@ private fun BodyDetailDataSiswa(
 }
 
 @Composable
-fun DetailDataSiswa(
-    siswa: Siswa, modifier: Modifier = Modifier
+fun DetailSiswa(
+    siswa: Siswa,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier, colors = CardDefaults.cardColors(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
         )
@@ -145,40 +147,30 @@ fun DetailDataSiswa(
                 .padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
-            BarisDetailData(
-                labelResID = R.string.nama1,
+            DetailSiswaRow(
+                labelResID = R.string.nama,
                 itemDetail = siswa.nama,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen.padding_medium
-                    )
-                )
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
-            BarisDetailData(
-                labelResID = R.string.alamat1,
+            DetailSiswaRow(
+                labelResID = R.string.alamat,
                 itemDetail = siswa.alamat,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen.padding_medium
-                    )
-                )
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
-            BarisDetailData(
-                labelResID = R.string.telpon1,
-                itemDetail = siswa.telepon,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen.padding_medium
-                    )
-                )
+            DetailSiswaRow(
+                labelResID = R.string.telpon,
+                itemDetail = siswa.telpon,
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
         }
     }
 }
 
 @Composable
-private fun BarisDetailData(
-    @StringRes labelResID: Int, itemDetail: String, modifier: Modifier = Modifier
+private fun DetailSiswaRow(
+    @StringRes labelResID: Int,
+    itemDetail: String,
+    modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
         Text(stringResource(labelResID))
@@ -196,7 +188,7 @@ private fun DeleteConfirmationDialog(
     AlertDialog(
         onDismissRequest = { /* Do nothing */ },
         title = { Text(stringResource(R.string.attention)) },
-        text = { Text(stringResource(R.string.tanya)) },
+        text = { Text(stringResource(R.string.delete_question)) },
         modifier = modifier,
         dismissButton = {
             TextButton(onClick = onDeleteCancel) {

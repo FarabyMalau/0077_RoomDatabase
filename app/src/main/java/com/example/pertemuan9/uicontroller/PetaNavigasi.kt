@@ -1,4 +1,4 @@
-package com.example.pertemuan9.uicontroller
+package com.example.pertemuan9.view.uicontroller
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -9,19 +9,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa
-import com.example.pertemuan9.uicontroller.route.DestinasiDetailSiswa.itemIdArg
-import com.example.pertemuan9.uicontroller.route.DestinasiEditSiswa
-import com.example.pertemuan9.view.DestinasiEntry
-import com.example.pertemuan9.view.DestinasiHome
+import com.example.pertemuan9.view.DetailSiswaScreen
+import com.example.pertemuan9.view.EditSiswaScreen
 import com.example.pertemuan9.view.EntrySiswaScreen
 import com.example.pertemuan9.view.HomeScreen
+import com.example.pertemuan9.view.route.DestinasiDetailSiswa
+import com.example.pertemuan9.view.route.DestinasiDetailSiswa.itemIdArg
+import com.example.pertemuan9.view.route.DestinasiEditSiswa
+import com.example.pertemuan9.view.route.DestinasiEntry
+import com.example.pertemuan9.view.route.DestinasiHome
 
 @Composable
-fun SiswaApp(
-    navController: NavHostController = rememberNavController(),
-    modifier: Modifier = Modifier
-) {
+fun SiswaApp(modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
     HostNavigasi(navController = navController, modifier = modifier)
 }
 
@@ -31,16 +30,13 @@ fun HostNavigasi(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = DestinasiHome.route,
-        modifier = modifier
-    ) {
+    NavHost(navController = navController, startDestination = DestinasiHome.route, modifier = modifier)
+    {
         composable(DestinasiHome.route) {
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
                 navigateToItemUpdate = {
-                    navController.navigate("${DestinasiDetailSiswa.route}/$it")
+                    navController.navigate("${DestinasiDetailSiswa.route}/${it}")
                 }
             )
         }
