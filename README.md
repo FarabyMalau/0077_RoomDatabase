@@ -4,31 +4,52 @@ Aplikasi Android sederhana untuk mengelola data siswa (CRUD) menggunakan **Jetpa
 
 ## ✨ Fitur Aplikasi
 
-* Halaman Beranda
-* Tambah Data
-* Detail Data
-* Edit Data
-* Konfirmasi Hapus
+* **Halaman Beranda**: menampilkan daftar siswa
+* **Tambah Data**: menambahkan siswa baru (nama, alamat, telepon)
+* **Detail Data**: melihat informasi lengkap siswa
+* **Edit Data**: mengubah data siswa
+* **Konfirmasi Hapus**: dialog konfirmasi sebelum data dihapus
 
 ## 🖼️ Tangkapan Layar (Screenshots)
 
 ### 1. Beranda Kosong & Form Tambah Data
 
-| Beranda Kosong | Form Tambah Data |
-|:---:|:---:|
-| ![Beranda Kosong](<img width="397" height="827" alt="image" src="https://github.com/user-attachments/assets/040a6ef0-7a83-4824-8a96-70eb87a807c1" />
-) | ![Form Tambah Data](<img width="392" height="820" alt="image" src="https://github.com/user-attachments/assets/4d15b6d8-9e77-4a11-af13-49aefa242127" />
-) |
+<table align="center">
+  <tr>
+    <th align="center">Beranda Kosong</th>
+    <th align="center">Form Tambah Data</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://github.com/user-attachments/assets/040a6ef0-7a83-4824-8a96-70eb87a807c1" alt="Beranda Kosong" width="250"></td>
+    <td align="center"><img src="https://github.com/user-attachments/assets/4d15b6d8-9e77-4a11-af13-49aefa242127" alt="Form Tambah Data" width="250"></td>
+  </tr>
+</table>
 
 ### 2. Detail, Edit, & Hapus Data
 
-| Detail Data | Edit Data | Konfirmasi Hapus |
-|:---:|:---:|:---:|
-| ![Detail Data](<img width="395" height="823" alt="image" src="https://github.com/user-attachments/assets/2646ab61-3d85-4eab-aed1-5ae1fc03873f" />) (<img width="380" height="822" alt="image" src="https://github.com/user-attachments/assets/8e755973-4835-4203-b52b-c180b159ae1d" />)
-| ![Edit Data](<img width="390" height="820" alt="image" src="https://github.com/user-attachments/assets/846284aa-141e-4b6b-994d-129df5406764" />) (<img width="392" height="822" alt="image" src="https://github.com/user-attachments/assets/7fd9b7fc-1554-43da-baed-613e63d4771b" />)
- | ![Konfirmasi Hapus](<img width="391" height="821" alt="image" src="https://github.com/user-attachments/assets/504dd1ea-347a-4cff-b2c7-8176ca3ac5d8" />
-) (<img width="388" height="820" alt="image" src="https://github.com/user-attachments/assets/4b176bdd-a787-40b6-a911-06119ad2ba7c" />)
- |
+#### Detail Data
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2646ab61-3d85-4eab-aed1-5ae1fc03873f" alt="Detail Data 1" width="250">
+  &nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/8e755973-4835-4203-b52b-c180b159ae1d" alt="Detail Data 2" width="250">
+</p>
+
+#### Edit Data
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/846284aa-141e-4b6b-994d-129df5406764" alt="Edit Data 1" width="250">
+  &nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/7fd9b7fc-1554-43da-baed-613e63d4771b" alt="Edit Data 2" width="250">
+</p>
+
+#### Konfirmasi Hapus
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/504dd1ea-347a-4cff-b2c7-8176ca3ac5d8" alt="Konfirmasi Hapus 1" width="250">
+  &nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/4b176bdd-a787-40b6-a911-06119ad2ba7c" alt="Konfirmasi Hapus 2" width="250">
+</p>
 
 ## 🛠️ Teknologi yang Digunakan
 
